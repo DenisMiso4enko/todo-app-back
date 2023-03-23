@@ -1,0 +1,14 @@
+get http://localhost:3000/todos - получение всех todos
+
+post http://localhost:3000/todos/create - создание todo
+принимает {                                    и возвращает этот объект    (тут я вставил объект в формате JSON)
+              "title": "todo1", // string
+              "id": "1", // number
+              "isDone": "false" // boolean
+          }
+
+delete http://localhost:3000/todos/delete - удаление todo
+принимает id и если все хорошо возвращает сообщение об успешном удалении
+
+patch http://localhost:3000/todos/checked - обновление isDone
+принимает id и checked(на фронте устанавливаешь true или false) и если все хорошо возвращает сообщение об успешном обновлении
