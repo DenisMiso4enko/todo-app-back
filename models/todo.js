@@ -2,9 +2,10 @@ import { Schema, model } from 'mongoose'
 
 const schema = new Schema({
 	title: String,
-	id: Number,
-	isDone: Boolean
-}, {timestamps: true})
+	id: String,
+	isDone: Boolean,
+	data: String
+})
 
 
 export const todoModel = model('Todo', schema)

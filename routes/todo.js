@@ -12,6 +12,7 @@ todoRouter.get("/", async (req, res) => {
       res.status(400).json({ message: "Todos not found" });
     }
   } catch (e) {
+    console.log(e.message)
     res.status(500).json({ message: "Server error" });
   }
 });
