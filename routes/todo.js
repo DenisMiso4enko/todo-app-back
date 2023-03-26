@@ -29,22 +29,24 @@ todoRouter.post("/post", async (req, res) => {
   }
 });
 
-// todoRouter.delete("/delete", async (req, res) => {
-//   try {
-//     const { id } = req.body;
-//     await todoModel.deleteOne({ id });
-//     res.status(202).json({ message: "todo was deleted" });
-//   } catch (e) {
-//     res.status(500).json({ message: "Server error" });
-//   }
-// });
+todoRouter.delete("/delete", async (req, res) => {
+  try {
+    const { id } = req.body;
+    await todoModel.deleteOne({ id });
+    const todoList = await todoModel.find();
+    res.status(202).json({ message: "todo was deleted", body: todoList });
+  } catch (e) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
-// todoRouter.patch('/checked', async (req, res) => {
-// 	try {
-// 		const { id, checked } = req.body
-// 		await todoModel.findOneAndUpdate({id}, {isDone: checked})
-// 		res.status(202).json({message: 'todo was updated'})
-// 	} catch (e) {
-// 		res.status(500).json({message: 'Server error'})
-// 	}
-// })
+todoRouter.patch("/checked", async (req, res) => {
+  try {
+    const { id, checked } = req.body;
+    await todoModel.findOneAndUpdate({ id }, { isDone: checked });
+    const todoList = await todoModel.find();
+    res.status(202).json({ message: "todo was updated", body: todoList });
+  } catch (e) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
