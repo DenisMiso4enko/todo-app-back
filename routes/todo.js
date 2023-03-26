@@ -42,8 +42,9 @@ todoRouter.delete("/delete", async (req, res) => {
 
 todoRouter.patch("/checked", async (req, res) => {
   try {
-    const { id, checked } = req.body;
-    await todoModel.findOneAndUpdate({ id }, { isDone: checked });
+    const { id, isDone } = req.body;
+    console.log(id, isDone);
+    await todoModel.findOneAndUpdate({ id }, { isDone });
     const todoList = await todoModel.find();
     res.status(202).json({ message: "todo was updated", body: todoList });
   } catch (e) {
