@@ -43,8 +43,18 @@ todoRouter.delete("/delete", async (req, res) => {
 todoRouter.patch("/checked", async (req, res) => {
   try {
     const { id, isDone } = req.body;
-    console.log(id, isDone);
     await todoModel.findOneAndUpdate({ id }, { isDone });
+    const todoList = await todoModel.find();
+    res.status(202).json({ message: "todo was updated", body: todoList });
+  } catch (e) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+todoRouter.patch("/updateTitle", async (req, res) => {
+  try {
+    const { id, title } = req.body;
+    await todoModel.findOneAndUpdate({ id }, { title });
     const todoList = await todoModel.find();
     res.status(202).json({ message: "todo was updated", body: todoList });
   } catch (e) {
