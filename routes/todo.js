@@ -12,7 +12,7 @@ todoRouter.get("/", async (req, res) => {
       res.status(400).json({ message: "Todos not found" });
     }
   } catch (e) {
-    console.log(e.message)
+    console.log(e.message);
     res.status(500).json({ message: "Server error" });
   }
 });
@@ -20,8 +20,9 @@ todoRouter.get("/", async (req, res) => {
 todoRouter.post("/post", async (req, res) => {
   try {
     const newList = req.body;
-    const list = await todoModel.insertMany(newList);
-    res.status(200).json(list);
+    await todoModel.insertMany(newList);
+    const todoList = await todoModel.find();
+    res.status(200).json(todoList);
   } catch (e) {
     console.log(e.message);
     res.status(500).json({ message: "Server error" });
